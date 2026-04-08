@@ -15,7 +15,7 @@ X_nomissing = pd.concat(
         pd.DataFrame(rng.random((nsamples, 2)), columns=["age", "weight"]),
         # half categorical, sandwhiched between 2 multicat
         pd.Series(rng.integers(0, 2, nsamples), name="ismale"),
-        pd.get_dummies(rng.integers(0, 3, nsamples)).rename(
+        pd.get_dummies(rng.integers(0, 3, nsamples), dtype=int).rename(
             columns=dict(zip(range(3), ["fries_s", "fries_m", "fries_l"]))
         ),
     ],
