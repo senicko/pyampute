@@ -117,7 +117,7 @@ class mdPatterns:
         group_values.sort_values(
             by=["n_missing_values", "row_count"], ascending=[True, False], inplace=True
         )
-        group_values = group_values.append(colsums, ignore_index=True)
+        group_values = pd.concat([group_values, pd.DataFrame(colsums).T], ignore_index=True)
 
         # add extra row to patterns when there are no incomplete rows in dataset
         if group_values.iloc[0, 0:-2].values.tolist() != list(np.ones(len(sorted_col))):
@@ -137,9 +137,9 @@ class mdPatterns:
             percents = ((group_values.iloc[0:-1, 0]).astype(int) / X.shape[0]).round(2)
             group_values.iloc[0:-1, 0] = percents.astype(str)
             group_values.iloc[-1, 1:-1] = group_values.iloc[-1, 1:-1] / X.shape[0]
-            group_values.iloc[-1, -1] = (
-                group_values.iloc[-1, -1] / (X.shape[0] * X.shape[1])
-            ).round(2)
+            group_values.iloc[-1, -1] = round(
+                group_values.iloc[-1, -1] / (X.shape[0] * X.shape[1]), 2
+            )
 
         self.md_patterns = group_values
         self.md_patterns.index = (

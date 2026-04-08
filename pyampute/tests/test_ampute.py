@@ -42,9 +42,7 @@ class TestAmpute(unittest.TestCase):
                 )  # expect: around 250
                 # about half the rows should be missing values
                 self.assertAlmostEqual(
-                    patterns.loc["n_missing_values_per_col", "n_missing_values"].astype(
-                        int
-                    ),
+                    int(patterns.loc["n_missing_values_per_col", "n_missing_values"]),
                     0.5 * n,
                     delta=0.05 * n,
                 )  # expect: around 500
@@ -67,9 +65,7 @@ class TestAmpute(unittest.TestCase):
                 self.assertEqual(patterns.loc["n_missing_values_per_col", 1], 0)
                 # about half the rows should be missing values
                 self.assertAlmostEqual(
-                    patterns.loc["n_missing_values_per_col", "n_missing_values"].astype(
-                        int
-                    ),
+                    int(patterns.loc["n_missing_values_per_col", "n_missing_values"]),
                     0.5 * n,
                     delta=0.05 * n,
                 )  # expect: around 500
@@ -106,7 +102,7 @@ class TestAmpute(unittest.TestCase):
         patterns = mdp.get_patterns(X_amputed, show_plot=False)
         # about 30% rows should be missing values
         self.assertAlmostEqual(
-            patterns.loc["n_missing_values_per_col", "n_missing_values"].astype(int),
+            int(patterns.loc["n_missing_values_per_col", "n_missing_values"]),
             0.3 * n,
             delta=0.05 * n,
         )
@@ -244,9 +240,7 @@ class TestAmpute(unittest.TestCase):
             patterns = mdp.get_patterns(X_amputed, show_plot=False)
             # about 30% rows should be missing values
             self.assertAlmostEqual(
-                patterns.loc["n_missing_values_per_col", "n_missing_values"].astype(
-                    int
-                ),
+                int(patterns.loc["n_missing_values_per_col", "n_missing_values"]),
                 0.3 * n,
                 delta=0.05 * n,
             )
